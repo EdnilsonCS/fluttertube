@@ -1,3 +1,4 @@
+import 'package:exemplo_youtube_curso/delegates/data_search.dart';
 import 'package:flutter/material.dart';
 
 
@@ -23,8 +24,9 @@ class  Home extends StatelessWidget {
           },
           ),
           IconButton(icon:Icon(Icons.search) ,
-          onPressed: (){
-            
+          onPressed: () async{
+           String result = await showSearch(context: context,delegate: DataSearch());
+           print(result);
           },
           )
         ],
