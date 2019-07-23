@@ -1,6 +1,7 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:exemplo_youtube_curso/blocs/videos_bloc.dart';
 import 'package:exemplo_youtube_curso/delegates/data_search.dart';
+import 'package:exemplo_youtube_curso/widgets/videostile.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
@@ -34,17 +35,21 @@ class Home extends StatelessWidget {
           )
         ],
       ),
+      backgroundColor: Colors.black,
       body: StreamBuilder(
         stream: BlocProvider.of<VideosBloc>(context).outVideos,
-        builder:(context,snapshot){
-            if(snapshot.hasData){
-              return ListView.builder(
-                itemBuilder: null,
-              );
-            }else{
-              return Container();
-            }
-        } ,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return ListView.builder(
+              itemBuilder: (context, index) {
+                return VideoTile(snapshot.data[index]);
+              },
+              itemCount: snapshot.data.length,
+            );
+          } else {
+            return Container();
+          }
+        },
       ),
     );
   }
